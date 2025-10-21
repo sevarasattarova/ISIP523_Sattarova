@@ -10,6 +10,10 @@ public class Orug
         Name = name;
         uron = damage;
     }
+    public override string ToString()
+    {
+        return $"{Name} урон {uron} ";
+    }
 }
 
 public class Brone
@@ -21,6 +25,10 @@ public class Brone
     {
         Name = name;
         uroven = defense;
+    }
+    public override string ToString()
+    {
+        return $"{Name} броня {uroven} ";
     }
 }
 
@@ -37,7 +45,7 @@ public class Player
     {
         MaxHealth = 100;
         Health = MaxHealth;
-        CurrentWeapon = new Orug("Меч", 3);
+        CurrentWeapon = new Orug("Меч", 8);
         CurrentArmor = new Brone("Алмазный доспех", 0.9);
         IsDefending = false;
     }
@@ -93,6 +101,7 @@ public class Player
     public void Attack(Enemy enemy)
     {
         int playerDamage = CurrentWeapon.uron;
+        enemy.TakeDamage(playerDamage);
         Console.WriteLine($" Вы наносите {playerDamage} урона!");
 
         if (enemy.Health <= 0)
@@ -283,12 +292,29 @@ public class Game
         player = new Player();
         random = new Random();
         Count = 0;
+        weapons = new List<Orug>
+        {
+            new Orug("палка", 1),
+            new Orug("деревянный меч", 3),
+            new Orug("лук", 5),
+            new Orug("меч", 9),
+            new Orug("трезубец", 10),
+            new Orug("какашкт", 50),
 
+        };
+
+        armors = new List<Brone>
+        {
+            new Brone("Алмазная броня",0.9),
+            new Brone("Железная броня",0.85),
+            new Brone("Кожанная броня", 0.8),
+            new Brone("Лачуга",0.77),
+            new Brone("Скин стива",0.7)
+        };
     }
     public void StartGame()
     {
         Console.WriteLine("Добро пожаловать в игру!");
-        Console.WriteLine("Сражайтесь с врагами, находите сокровища и выживайте!\n");
 
         while (player.Health > 0)
         {
@@ -315,9 +341,9 @@ public class Game
     private void PrintPlayerStatus()
     {
         Console.WriteLine($"==ХОД {Count}==");
-        Console.WriteLine($"{player.Health}/{player.MaxHealth}");
-        Console.WriteLine($"Оружие {player.CurrentWeapon}");
-        Console.WriteLine($"Доспехи {player.CurrentArmor}");
+        Console.WriteLine($"Здоровье: {player.Health}/{player.MaxHealth}");
+        Console.WriteLine($"Оружие: {player.CurrentWeapon}");
+        Console.WriteLine($"Доспехи: {player.CurrentArmor}");
     }
 
     private void FrozenCheck()
