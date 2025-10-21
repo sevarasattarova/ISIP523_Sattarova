@@ -41,24 +41,72 @@ public class Player
         CurrentArmor = new Brone("Алмазный доспех", 0.9);
         IsDefending = false;
     }
-    public void TakeDamage()
+    public void TakeDamage(Enemy attacker)
     {
+        int actualDamage = attacker.Attack;
 
+        if (IsDefending)
+        {
+            Random random = new Random();
+            if (random.NextDouble() < 0.4)
+            {
+                IsDefending = false;
+                Console.WriteLine(" Вы успешно уклонились от атаки");
+                return;
+            }
+            else
+            {
+                int blockedDamage = (int)(actualDamage - actualDamage * CurrentArmor.uroven);
+
+                if (attacker.Type == EnemyType.Skeleton)
+                {
+                    blockedDamage = 0;
+                }
+
+                actualDamage = actualDamage - blockedDamage;
+                Console.WriteLine($" Вы блокируете {blockedDamage} урона");
+            }
+            IsDefending = false;
+        }
+        else
+        {
+            if (attacker.Type != EnemyType.Skeleton)
+            {
+                actualDamage = actualDamage;
+            }
+        }
+
+        Health -= actualDamage;
+        Console.WriteLine($" Вы получаете {actualDamage} урона!");
+        Console.WriteLine($" Ваше здоровье: {Health}/{MaxHealth}");
     }
     public void Heal()
     {
-
+        Health = MaxHealth;
+        Console.WriteLine(" Ваше здоровье полностью восстановлено!");
     }
     public void Defend()
     {
-
+        IsDefending = true;
     }
-    public void Attack()
+
+    public void Attack(Enemy enemy)
     {
+        int playerDamage = CurrentWeapon.uron;
+        Console.WriteLine($" Вы наносите {playerDamage} урона!");
 
+        if (enemy.Health <= 0)
+        {
+            Console.WriteLine($" {enemy.Type} побежден!");
+        }
+        else
+        {
+            Console.WriteLine($" Здоровье {enemy.Type}: {enemy.Health}/{enemy.MaxHealth}");
+        }
     }
+}
 
-    public enum EnemyType
+public enum EnemyType
     {
         Goblin,
         Skeleton,
@@ -82,7 +130,44 @@ public class Player
             Defense = defense;
         }
 
-        public enum BossType
+    public void TakeDamage(int damage)
+    {
+        Health -= damage;
+    }
+
+    public virtual void AttackPlayer(Player player)
+    {
+        int damage = Attack;
+        Random random = new Random();
+
+        switch (Type)
+        {
+            case EnemyType.Goblin:
+                if (random.NextDouble() < 0.2) 
+                {
+                    damage *= 2;
+                    Console.WriteLine($"{Type} наносит критический удар!");
+                }
+                break;
+
+            case EnemyType.Mage:
+                if (random.NextDouble() < 0.15) 
+                {
+                    player.IsFrozen = true;
+                    Console.WriteLine($"{Type} замораживает вас! Вы пропустите следующий ход");
+                }
+                break;
+        }
+
+        if (!player.IsFrozen || Type != EnemyType.Mage)
+        {
+            Console.WriteLine($"{Type} атакует!");
+            player.TakeDamage(this);
+        }
+    }
+}
+
+public enum BossType
         {
             VVG,
             Kovalevsky,
