@@ -21,3 +21,21 @@ public class Brone
         uroven = defense;
     }
 }
+
+public class Player
+{
+    public int Health { get; set; }
+    public int MaxHealth { get; set; }
+    public Orug CurrentWeapon { get; set; }
+    public Brone CurrentArmor { get; set; }
+    public bool IsFrozen { get; set; }
+    public bool IsDefending { get; set; }
+
+    public Player()
+    {
+        MaxHealth = 100;
+        Health = MaxHealth;
+        CurrentWeapon = new Orug("Меч", 3);
+        CurrentArmor = new Brone("Алмазный доспех", 0.9);
+        IsDefending = false;
+    }
