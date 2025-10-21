@@ -1,4 +1,6 @@
-﻿public class Orug
+﻿using System;
+
+public class Orug
 {
     public string Name { get; set; }
     public int uron { get; set; }
@@ -39,3 +41,42 @@ public class Player
         CurrentArmor = new Brone("Алмазный доспех", 0.9);
         IsDefending = false;
     }
+    public void TakeDamage()
+    {
+
+    }
+    public void Heal()
+    {
+
+    }
+    public void Defend()
+    {
+
+    }
+    public void Attack()
+    {
+
+    }
+
+    public enum EnemyType
+    {
+        Goblin,
+        Skeleton,
+        Mage
+    }
+    public class Enemy
+    {
+        public EnemyType Type { get; set; }
+        public int Health { get; set; }
+        public int MaxHealth { get; set; }
+        public int Attack { get; set; }
+        public int Defense { get; set; }
+
+        public Enemy(EnemyType type, int health, int attack, int defense)
+        {
+            Type = type;
+            Health = health;
+            MaxHealth = health;
+            Attack = attack;
+            Defense = defense;
+        }
