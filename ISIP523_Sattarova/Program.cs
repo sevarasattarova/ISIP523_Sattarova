@@ -213,35 +213,76 @@ public enum BossType
                 MaxHealth = Health;
             }
 
-            private static EnemyType GetEnemyTypeFromBoss(BossType bossType)
-            {
-                switch (bossType)
+    private static EnemyType GetEnemyTypeFromBoss(BossType bossType)
+    {
+        switch (bossType)
+        {
+            case BossType.VVG:
+                return EnemyType.Goblin;
+            case BossType.Kovalevsky:
+                return EnemyType.Skeleton;
+            case BossType.ArchmageCPP:
+                return EnemyType.Mage;
+            case BossType.PestovCMinus:
+                return EnemyType.Skeleton;
+            default:
+                return EnemyType.Goblin;
+        }
+    }
+          public override void AttackPlayer(Player player)
+    {
+        int damage = Attack;
+        Random random = new Random();
+
+        switch (BossType)
+        {
+            case BossType.VVG:
+                if (random.NextDouble() < 0.3)
                 {
-                    case BossType.VVG:
-                        return EnemyType.Goblin;
-                    case BossType.Kovalevsky:
-                        return EnemyType.Skeleton;
-                    case BossType.ArchmageCPP:
-                        return EnemyType.Mage;
-                    case BossType.PestovCMinus:
-                        return EnemyType.Skeleton;
-                    default:
-                        return EnemyType.Goblin;
+                    damage *= 2;
+                    Console.WriteLine($"{BossType} наносит критический удар!");
                 }
-            }
+                break;
 
-            public class Game
-            {
-                private Player player;
-                private Random random;
-                private int Count;
-                private List<Orug> weapons;
-                private List<Brone> armors;
-
-                public Game()
+            case BossType.ArchmageCPP:
+                if (random.NextDouble() < 0.25) 
                 {
-                    player = new Player();
-                    random = new Random();
-                    Count = 0;
-
+                    player.IsFrozen = true;
+                    Console.WriteLine($"{BossType} замораживает вас! Вы пропустите следующий ход");
                 }
+                break;
+
+            case BossType.PestovCMinus:
+                if (random.NextDouble() < 0.3)
+                {
+                    player.IsFrozen = true;
+                    Console.WriteLine($"{BossType} замораживает вас! Вы пропустите следующий ход");
+                }
+                break;
+        }
+
+        if (!player.IsFrozen || (BossType != BossType.ArchmageCPP && BossType != BossType.PestovCMinus))
+        {
+            Console.WriteLine($"{BossType} атакует!");
+            player.TakeDamage(this);
+        }
+    }
+}
+
+
+public class Game
+{
+    private Player player;
+    private Random random;
+    private int Count;
+    private List<Orug> weapons;
+    private List<Brone> armors;
+
+    public Game()
+    {
+        player = new Player();
+        random = new Random();
+        Count = 0;
+
+    }
+}
