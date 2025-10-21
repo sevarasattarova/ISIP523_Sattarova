@@ -145,3 +145,18 @@ public class Player
                 }
             }
 
+            public class Game
+            {
+                private Player player;
+                private Random random;
+                private int Count;
+                private List<Orug> weapons;
+                private List<Brone> armors;
+
+                public Game()
+                {
+                    player = new Player();
+                    random = new Random();
+                    Count = 0;
+
+                }
