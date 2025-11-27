@@ -124,6 +124,31 @@ namespace framework_sattarova
 
             UserMenu(user);
         }
-    }
-    }
+        static void OutputAllPVZ()
+        {
+            List <pvs> pvz = Core.Context.pvs.ToList();
+
+            Console.WriteLine("Наши ПВЗ");
+
+            foreach (pvs pvzs in pvz)
+            {
+                Console.WriteLine($"{pvzs.ID}, {pvzs.name}, {pvzs.addres}");
+            }
+            Console.WriteLine("----------------------------------------");
+        }
+        static void UserMenu(person user)
+        {
+            Console.WriteLine($"Личный кабинет{user.name}");
+            while (true)
+            {
+                Console.WriteLine("1. Посмотреть товары");
+                Console.WriteLine("2. Добавить товар");
+                Console.WriteLine("3. Посмотреть свою корзину");
+                Console.WriteLine("4. Заказать товар из корзины");
+                Console.WriteLine("5. История заказов");
+                Console.WriteLine("6. Выйти из акка");
+            }
+
+            }
+        }
 
