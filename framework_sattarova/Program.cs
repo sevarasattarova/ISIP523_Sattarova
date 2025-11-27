@@ -10,7 +10,13 @@ namespace framework_sattarova
     {
         static void Main(string[] args)
         {
-            Console.WriteLine( );
+            while (true) {
+                Console.WriteLine("-----МЕНЮ МАГАЗИНА----");
+                Console.WriteLine("1. Просмотр товаров");
+                Console.WriteLine("2. Регистрация пользователя");
+                Console.WriteLine("3. Вход в аккаунт");
+                Console.WriteLine("4. Вывод всех пвз");
+            }
         }
     }
 }
