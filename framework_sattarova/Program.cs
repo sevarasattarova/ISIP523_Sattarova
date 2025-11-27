@@ -10,12 +10,30 @@ namespace framework_sattarova
     {
         static void Main(string[] args)
         {
-            while (true) {
+            string chois;
+            while (true)
+            {
                 Console.WriteLine("-----МЕНЮ МАГАЗИНА----");
                 Console.WriteLine("1. Просмотр товаров");
                 Console.WriteLine("2. Регистрация пользователя");
                 Console.WriteLine("3. Вход в аккаунт");
                 Console.WriteLine("4. Вывод всех пвз");
+                chois = Console.ReadLine();
+
+                switch (chois)
+                {
+                    case "1":
+                        break;
+                    case "2":
+                        break;
+                    case "3":
+                        break;
+                    case "4":
+                        break;
+                    default:
+                        Console.WriteLine("Ошибка лол");
+                        break;
+                }
             }
         }
     }
