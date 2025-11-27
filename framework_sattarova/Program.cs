@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace framework_sattarova
 {
@@ -23,6 +24,7 @@ namespace framework_sattarova
                 switch (chois)
                 {
                     case "1":
+                        Print();
                         break;
                     case "2":
                         break;
@@ -36,7 +38,7 @@ namespace framework_sattarova
                 }
             }
         }
-            public void Print()
+            static void Print()
             {
                 List<products> products = Core.Context.products.ToList();
 
@@ -50,6 +52,35 @@ namespace framework_sattarova
                 Console.WriteLine("-----------------------------------------");
 
 
+            }
+        static void Registracion()
+        {
+            Console.WriteLine("Введите  Login");
+            string login = Console.ReadLine();
+
+            Console.WriteLine("Введите пароль");
+            string password = Console.ReadLine();
+
+            Console.WriteLine("Введите пароль для проверки");
+            string passwordVerification = Console.ReadLine();
+
+            if ( login == " " || password == " " || passwordVerification == " ")
+            {
+                Console.WriteLine("Все поля должны быть заполнены");
+                return;
+            }
+
+            if (password != passwordVerification)
+            {
+                Console.WriteLine("Пароли должны быть одинаковыми");
+                return;
+            }
+
+            bool LoginProverka = Core.Context.person.Any(u => u.name == login);
+            if (LoginProverka)
+            {
+                Console.WriteLine("Пользователь с таким логином уже есть");
+                return;
             }
         }
     }
