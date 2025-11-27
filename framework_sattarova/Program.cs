@@ -95,6 +95,19 @@ namespace framework_sattarova
 
             Console.WriteLine("Вы успешно зарегестрировались");
         }
-    }
+        static void Autification()
+        {
+            Console.WriteLine("Введите логин");
+            string login = Console.ReadLine();
+
+            Console.WriteLine("Введите пароль");
+            string password = Console.ReadLine();
+
+            if (login == " " || password == " ")
+            {
+                Console.WriteLine("Значение не должно быть пустым");
+                return;
+            }
+        }
     }
 
