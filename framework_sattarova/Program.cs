@@ -47,7 +47,7 @@ namespace framework_sattarova
                     Console.WriteLine($"{product.ID}, {product.name}, {product.price}, {product.kolvo}");
                 }
 
-                Console.WriteLine("------------------------------------------");
+                Console.WriteLine("-----------------------------------------");
 
 
             }
