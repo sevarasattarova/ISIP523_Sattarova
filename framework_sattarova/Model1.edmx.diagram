@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7ca5028ca80940c1a978e8027e17f9a3" Name="Diagram1">
+        <EntityTypeShape EntityType="pr8_sattarovaModel.corzina" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="pr8_sattarovaModel.orders" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="pr8_sattarovaModel.person" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="pr8_sattarovaModel.products" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="pr8_sattarovaModel.pvs" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="pr8_sattarovaModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="2" IsExpanded="true" />
+        <AssociationConnector Association="pr8_sattarovaModel.FK_corzina_person" ManuallyRouted="false" />
+        <AssociationConnector Association="pr8_sattarovaModel.FK_corzina_products" ManuallyRouted="false" />
+        <AssociationConnector Association="pr8_sattarovaModel.FK_orders_person" ManuallyRouted="false" />
+        <AssociationConnector Association="pr8_sattarovaModel.FK_orders_products" ManuallyRouted="false" />
+        <AssociationConnector Association="pr8_sattarovaModel.FK_orders_pvs" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

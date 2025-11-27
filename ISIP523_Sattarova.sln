@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36221.1 d17.14
+VisualStudioVersion = 17.14.36221.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISIP523_Sattarova", "ISIP523_Sattarova\ISIP523_Sattarova.csproj", "{3FE4ABF9-0701-4335-9481-1245A149E64B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "framework_sattarova", "framework_sattarova\framework_sattarova.csproj", "{E311215C-70A7-47DE-B665-2B272CD4366E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{3FE4ABF9-0701-4335-9481-1245A149E64B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FE4ABF9-0701-4335-9481-1245A149E64B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FE4ABF9-0701-4335-9481-1245A149E64B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E311215C-70A7-47DE-B665-2B272CD4366E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E311215C-70A7-47DE-B665-2B272CD4366E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E311215C-70A7-47DE-B665-2B272CD4366E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E311215C-70A7-47DE-B665-2B272CD4366E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
