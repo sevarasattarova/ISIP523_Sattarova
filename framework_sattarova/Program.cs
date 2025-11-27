@@ -36,5 +36,21 @@ namespace framework_sattarova
                 }
             }
         }
+            public void Print()
+            {
+                List<products> products = Core.Context.products.ToList();
+
+                Console.WriteLine("Наши товары");
+
+                foreach (products product in products)
+                {
+                    Console.WriteLine($"{product.ID}, {product.name}, {product.price}, {product.kolvo}");
+                }
+
+                Console.WriteLine("------------------------------------------");
+
+
+            }
+        }
     }
-}
+
