@@ -27,6 +27,7 @@ namespace framework_sattarova
                         Print();
                         break;
                     case "2":
+                        Registracion();
                         break;
                     case "3":
                         break;
@@ -82,6 +83,18 @@ namespace framework_sattarova
                 Console.WriteLine("Пользователь с таким логином уже есть");
                 return;
             }
+            person newUser = new person
+            {
+                name = login,
+                password = password,
+
+            };
+
+            Core.Context.person.Add(newUser);
+            Core.Context.SaveChanges();
+
+            Console.WriteLine("Вы успешно зарегестрировались");
         }
+    }
     }
 
