@@ -108,6 +108,22 @@ namespace framework_sattarova
                 Console.WriteLine("Значение не должно быть пустым");
                 return;
             }
+            person user = Core.Context.person.FirstOrDefault(u => u.name == login);
+
+            if (user == null)
+            {
+                Console.WriteLine("Нет такого пользователя");
+                return;
+            }
+            if (user.password != password)
+            {
+                Console.WriteLine("Неправильный пароль");
+                return;
+            }
+            Console.WriteLine("Авторизация прошла успешно");
+
+            UserMenu(user);
         }
+    }
     }
 
