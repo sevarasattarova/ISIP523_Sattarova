@@ -30,8 +30,10 @@ namespace framework_sattarova
                         Registracion();
                         break;
                     case "3":
+                        Autification();
                         break;
                     case "4":
+                        OutputAllPVZ();
                         break;
                     default:
                         Console.WriteLine("Ошибка");
@@ -167,6 +169,7 @@ namespace framework_sattarova
                         BueBasket(user);
                         break;
                     case "5":
+                        HistotyOrders(user);
                         break;
                     case "6":
                         Console.WriteLine("Выйти из аккаунта");
@@ -261,18 +264,60 @@ namespace framework_sattarova
                 switch (choice)
                 {
                     case "1":
-                        
+
                         break;
                     case "2":
-                        
+
                         break;
                     case "3":
                         return;
                     default:
                         Console.WriteLine("Ошибка");
                         break;
+
                 }
             }
+        }
+                static void HistotyOrders(person user)
+                {
+                    Console.WriteLine("История заказов");
+
+                    List<orders> orders = Core.Context.orders
+                        .Include(o => o.pvs)
+                        .Include(o => o.OrderProduct)
+                        .Where(o => o.User_ID == user.ID)
+                        .OrderByDescending(o => o.Date)
+                        .ToList();
+
+                    if (!orders.Any())
+                    {
+                        Console.WriteLine("У вас нет заказов");
+                        return;
+                    }
+                    foreach (orders order in orders)
+                    {
+                        Console.WriteLine($"Заказ {order.ID} от {order.date:dd.MM.yyyy}");
+                        Console.WriteLine($"ПВЗ: {order.pvs.name}");
+                        Console.WriteLine($"Сумма: {order.TotalPrice} руб.");
+                        Console.WriteLine("Товары:");
+
+                        var orderProducts = Core.Context.OrderProduct
+                            .Include(op => op.Product)
+                            .Where(op => op.Order_ID == order.ID)
+                            .ToList();
+
+                        foreach (var orderProduct in orderProducts)
+                        {
+                            Console.WriteLine($"{orderProduct.Product.NameProduct}* {orderProduct.Count}");
+                        }
+                        Console.WriteLine("---------------------------------------------------");
+                    }
+                }
+
+
+
+            }
+
         }
     }
 }
