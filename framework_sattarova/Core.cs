@@ -8,7 +8,7 @@ namespace framework_sattarova
 {
     internal class Core
     {
-        public static pr8_sattarovaEntities Context = new pr8_sattarovaEntities();
+        public static pr8_sattarovaEntities1 Context = new pr8_sattarovaEntities1();
 
     }
 }

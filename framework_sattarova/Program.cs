@@ -155,16 +155,18 @@ namespace framework_sattarova
                 switch (chois)
                 {
                     case "1":
-                        AddProduct(user);
-=                        break;
+                        Print();
+                        break;
                     case "2":
-=                        break;
+                        AddProduct(user);
+                       break;
                     case "3":
-=                        break;
+                        LookBasket(user);
+                       break;
                     case "4":
-=                        break;
-                    case "5":
-=                        break;
+                       break;
+                   case "5":
+                       break;
                     case "6":
                         Console.WriteLine("Выйти из аккаунта");
                         return;
@@ -214,6 +216,37 @@ namespace framework_sattarova
                 Core.Context.corzina.Add(newBasket);
                 Console.WriteLine("Мы добавили товар");
         Core.Context.SaveChanges();
+        }
+        static void LookBasket(person user)
+        {
+            List<corzina> baskets = Core.Context.corzina
+                .Where(b => b.userID == user.ID)
+                .ToList();
+
+            Console.WriteLine("Ваша корзина");
+            if (!baskets.Any())
+            {
+                Console.WriteLine("Корзина пуста");
+                return;
+            }
+
+            decimal totalPrice = 0;
+            int itemNumber = 1;
+
+            foreach (corzina basket in baskets)
+            {
+                Console.WriteLine($"{basket.products.name}");
+                Console.WriteLine($"Цена:{basket.products.price}");
+                Console.WriteLine($"Кол-во:{basket.kolvo}");
+                Console.WriteLine($"Суммa:{basket.products.price * basket.kolvo}");
+
+                totalPrice += basket.products.price * basket.kolvo;
+                itemNumber++;
+            }
+            Console.WriteLine($"Общая сумма:{totalPrice}");
+            Console.WriteLine("--------------------------------------------------------------------");
+        }
+
         }
 
     }

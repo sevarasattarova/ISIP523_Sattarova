@@ -12,6 +12,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="userID" Type="int" Nullable="false" />
           <Property Name="productID" Type="int" Nullable="false" />
+          <Property Name="kolvo" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="orders">
           <Key>
@@ -22,6 +23,8 @@
           <Property Name="PVSID" Type="int" Nullable="false" />
           <Property Name="productID" Type="int" Nullable="false" />
           <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="status" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="person">
           <Key>
@@ -57,6 +60,12 @@
           <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Table_1">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_corzina_person">
           <End Role="person" Type="Self.person" Multiplicity="1" />
@@ -125,6 +134,7 @@
           <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pvs" EntityType="Self.pvs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_1" EntityType="Self.Table_1" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_corzina_person" Association="Self.FK_corzina_person">
             <End Role="person" EntitySet="person" />
             <End Role="corzina" EntitySet="corzina" />
@@ -158,6 +168,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="userID" Type="Int32" Nullable="false" />
           <Property Name="productID" Type="Int32" Nullable="false" />
+          <Property Name="kolvo" Type="Int32" Nullable="false" />
           <NavigationProperty Name="person" Relationship="Self.FK_corzina_person" FromRole="corzina" ToRole="person" />
           <NavigationProperty Name="products" Relationship="Self.FK_corzina_products" FromRole="corzina" ToRole="products" />
         </EntityType>
@@ -170,6 +181,8 @@
           <Property Name="PVSID" Type="Int32" Nullable="false" />
           <Property Name="productID" Type="Int32" Nullable="false" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <NavigationProperty Name="person" Relationship="Self.FK_orders_person" FromRole="orders" ToRole="person" />
           <NavigationProperty Name="products" Relationship="Self.FK_orders_products" FromRole="orders" ToRole="products" />
           <NavigationProperty Name="pvs" Relationship="Self.FK_orders_pvs" FromRole="orders" ToRole="pvs" />
@@ -213,6 +226,12 @@
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Table_1">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_corzina_person">
           <End Role="person" Type="Self.person" Multiplicity="1" />
@@ -274,13 +293,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="pr8_sattarovaEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="pr8_sattarovaEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="corzina" EntityType="Self.corzina" />
           <EntitySet Name="orders" EntityType="Self.orders" />
           <EntitySet Name="person" EntityType="Self.person" />
           <EntitySet Name="products" EntityType="Self.products" />
           <EntitySet Name="pvs" EntityType="Self.pvs" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Table_1" EntityType="Self.Table_1" />
           <AssociationSet Name="FK_corzina_person" Association="Self.FK_corzina_person">
             <End Role="person" EntitySet="person" />
             <End Role="corzina" EntitySet="corzina" />
@@ -307,13 +327,14 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище pr8_sattarovaModelContainer" CdmEntityContainer="pr8_sattarovaEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище pr8_sattarovaModelContainer" CdmEntityContainer="pr8_sattarovaEntities1">
           <EntitySetMapping Name="corzina">
             <EntityTypeMapping TypeName="pr8_sattarovaModel.corzina">
               <MappingFragment StoreEntitySet="corzina">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="userID" ColumnName="userID" />
                 <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="kolvo" ColumnName="kolvo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -325,6 +346,8 @@
                 <ScalarProperty Name="PVSID" ColumnName="PVSID" />
                 <ScalarProperty Name="productID" ColumnName="productID" />
                 <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -364,6 +387,13 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_1">
+            <EntityTypeMapping TypeName="pr8_sattarovaModel.Table_1">
+              <MappingFragment StoreEntitySet="Table_1">
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

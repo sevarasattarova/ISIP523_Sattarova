@@ -13,10 +13,10 @@ namespace framework_sattarova
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class pr8_sattarovaEntities : DbContext
+    public partial class pr8_sattarovaEntities1 : DbContext
     {
-        public pr8_sattarovaEntities()
-            : base("name=pr8_sattarovaEntities")
+        public pr8_sattarovaEntities1()
+            : base("name=pr8_sattarovaEntities1")
         {
         }
     
@@ -31,5 +31,6 @@ namespace framework_sattarova
         public virtual DbSet<products> products { get; set; }
         public virtual DbSet<pvs> pvs { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<Table_1> Table_1 { get; set; }
     }
 }

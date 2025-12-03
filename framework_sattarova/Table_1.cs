@@ -12,18 +12,8 @@ namespace framework_sattarova
     using System;
     using System.Collections.Generic;
     
-    public partial class orders
+    public partial class Table_1
     {
         public int ID { get; set; }
-        public int userID { get; set; }
-        public int PVSID { get; set; }
-        public int productID { get; set; }
-        public System.DateTime date { get; set; }
-        public string status { get; set; }
-        public decimal TotalPrice { get; set; }
-    
-        public virtual person person { get; set; }
-        public virtual products products { get; set; }
-        public virtual pvs pvs { get; set; }
     }
 }

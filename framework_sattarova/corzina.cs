@@ -17,6 +17,7 @@ namespace framework_sattarova
         public int ID { get; set; }
         public int userID { get; set; }
         public int productID { get; set; }
+        public int kolvo { get; set; }
     
         public virtual person person { get; set; }
         public virtual products products { get; set; }
