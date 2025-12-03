@@ -39,21 +39,21 @@ namespace framework_sattarova
                 }
             }
         }
-            static void Print()
+        static void Print()
+        {
+            List<products> products = Core.Context.products.ToList();
+
+            Console.WriteLine("Наши товары");
+
+            foreach (products product in products)
             {
-                List<products> products = Core.Context.products.ToList();
-
-                Console.WriteLine("Наши товары");
-
-                foreach (products product in products)
-                {
-                    Console.WriteLine($"{product.ID}, {product.name}, {product.price}, {product.kolvo}");
-                }
-
-                Console.WriteLine("-----------------------------------------");
-
-
+                Console.WriteLine($"{product.ID}, {product.name}, {product.price}, {product.kolvo}");
             }
+
+            Console.WriteLine("-----------------------------------------");
+
+
+        }
         static void Registracion()
         {
             Console.WriteLine("Введите  Login");
@@ -65,7 +65,7 @@ namespace framework_sattarova
             Console.WriteLine("Введите пароль для проверки");
             string passwordVerification = Console.ReadLine();
 
-            if ( login == " " || password == " " || passwordVerification == " ")
+            if (login == " " || password == " " || passwordVerification == " ")
             {
                 Console.WriteLine("Все поля должны быть заполнены");
                 return;
@@ -126,7 +126,7 @@ namespace framework_sattarova
         }
         static void OutputAllPVZ()
         {
-            List <pvs> pvz = Core.Context.pvs.ToList();
+            List<pvs> pvz = Core.Context.pvs.ToList();
 
             Console.WriteLine("Наши ПВЗ");
 
@@ -148,9 +148,9 @@ namespace framework_sattarova
                 Console.WriteLine("5. История заказов");
                 Console.WriteLine("6. Выйти из акка");
 
-                string chois = Console.ReadLine();  
+                string chois = Console.ReadLine();
 
-              
+
 
                 switch (chois)
                 {
@@ -159,14 +159,15 @@ namespace framework_sattarova
                         break;
                     case "2":
                         AddProduct(user);
-                       break;
+                        break;
                     case "3":
                         LookBasket(user);
-                       break;
+                        break;
                     case "4":
-                       break;
-                   case "5":
-                       break;
+                        BueBasket(user);
+                        break;
+                    case "5":
+                        break;
                     case "6":
                         Console.WriteLine("Выйти из аккаунта");
                         return;
@@ -207,15 +208,15 @@ namespace framework_sattarova
             corzina existingBasket = Core.Context.corzina
                 .FirstOrDefault(b => b.userID == user.ID && b.productID == product.ID);
 
-           
-                corzina newBasket = new corzina
-                {
-                    userID = user.ID,
-                    productID = product.ID,
-                };
-                Core.Context.corzina.Add(newBasket);
-                Console.WriteLine("Мы добавили товар");
-        Core.Context.SaveChanges();
+
+            corzina newBasket = new corzina
+            {
+                userID = user.ID,
+                productID = product.ID,
+            };
+            Core.Context.corzina.Add(newBasket);
+            Console.WriteLine("Мы добавили товар");
+            Core.Context.SaveChanges();
         }
         static void LookBasket(person user)
         {
@@ -246,11 +247,38 @@ namespace framework_sattarova
             Console.WriteLine($"Общая сумма:{totalPrice}");
             Console.WriteLine("--------------------------------------------------------------------");
         }
+        static void BueBasket(person user)
+        {
+            Console.WriteLine("Оформление заказа");
+            LookBasket(user);
+            while (true)
+            {
+                Console.WriteLine("1. купить всю корзину");
+                Console.WriteLine("2. купить товар из корзины");
+                Console.WriteLine("3. Вернутся назад");
+                string choice = Console.ReadLine();
 
+                switch (choice)
+                {
+                    case "1":
+                        
+                        break;
+                    case "2":
+                        
+                        break;
+                    case "3":
+                        return;
+                    default:
+                        Console.WriteLine("Ошибка");
+                        break;
+                }
+            }
         }
-
     }
-
 }
+
+
+   
+
       
 
