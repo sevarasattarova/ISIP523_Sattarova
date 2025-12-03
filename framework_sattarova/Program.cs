@@ -148,26 +148,24 @@ namespace framework_sattarova
                 Console.WriteLine("5. История заказов");
                 Console.WriteLine("6. Выйти из акка");
 
-                int chois;
-                if (!int.TryParse(Console.ReadLine(), out chois))
-                {
-                    Console.WriteLine("Введи цифру");
-                    break;
-                }
+                string chois = Console.ReadLine();  
+
+              
 
                 switch (chois)
                 {
-                    case 1:
+                    case "1":
+                        AddProduct(user);
 =                        break;
-                    case 2:
+                    case "2":
 =                        break;
-                    case 3:
+                    case "3":
 =                        break;
-                    case 4:
+                    case "4":
 =                        break;
-                    case 5:
+                    case "5":
 =                        break;
-                    case 6:
+                    case "6":
                         Console.WriteLine("Выйти из аккаунта");
                         return;
                     default:
@@ -178,9 +176,48 @@ namespace framework_sattarova
 
             }
         }
+        static void AddProduct(person user)
+        {
+            Print();
+            Console.WriteLine("Введите ID товара для добавления");
+            int productID = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Введите кол-во:");
+            int quantity = Convert.ToInt32(Console.ReadLine());
+
+            products product = Core.Context.products.FirstOrDefault(p => p.ID == productID);
+            if (product == null)
+            {
+                Console.WriteLine("Товар с таким ID не найден");
+                return;
+            }
+            if (quantity > product.kolvo)
+            {
+                Console.WriteLine("Недостаточно товаров на складе");
+                return;
+            }
+            if (quantity <= 0)
+            {
+                Console.WriteLine("Товара должно быть >0");
+                return;
+            }
+
+            corzina existingBasket = Core.Context.corzina
+                .FirstOrDefault(b => b.userID == user.ID && b.productID == product.ID);
+
+           
+                corzina newBasket = new corzina
+                {
+                    userID = user.ID,
+                    productID = product.ID,
+                };
+                Core.Context.corzina.Add(newBasket);
+                Console.WriteLine("Мы добавили товар");
+        Core.Context.SaveChanges();
+        }
 
     }
 
 }
-        }
+      
 
