@@ -34,7 +34,7 @@ namespace framework_sattarova
                     case "4":
                         break;
                     default:
-                        Console.WriteLine("Ошибка лол");
+                        Console.WriteLine("Ошибка");
                         break;
                 }
             }
@@ -147,8 +147,40 @@ namespace framework_sattarova
                 Console.WriteLine("4. Заказать товар из корзины");
                 Console.WriteLine("5. История заказов");
                 Console.WriteLine("6. Выйти из акка");
-            }
+
+                int chois;
+                if (!int.TryParse(Console.ReadLine(), out chois))
+                {
+                    Console.WriteLine("Введи цифру");
+                    break;
+                }
+
+                switch (chois)
+                {
+                    case 1:
+=                        break;
+                    case 2:
+=                        break;
+                    case 3:
+=                        break;
+                    case 4:
+=                        break;
+                    case 5:
+=                        break;
+                    case 6:
+                        Console.WriteLine("Выйти из аккаунта");
+                        return;
+                    default:
+                        Console.WriteLine("Нет такого попробуй снова");
+                        break;
+
+                }
 
             }
+        }
+
+    }
+
+}
         }
 
